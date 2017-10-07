@@ -1,0 +1,50 @@
+let listData = [
+    {id: 1, name: 'Kitty01', status: 'available'},
+    {id: 2, name: 'Kitty02', status: 'available'},
+    {id: 3, name: 'Kitty03', status: 'available'},
+    {id: 4, name: 'Kitty04', status: 'available'},
+    {id: 5, name: 'Kitty05', status: 'available'},
+    {id: 6, name: 'Kitty06', status: 'available'},
+    {id: 7, name: 'Kitty07', status: 'available'},
+    {id: 8, name: 'Kitty08', status: 'available'},
+    {id: 9, name: 'Kitty09', status: 'available'},
+]
+
+module.exports.find = (callback) => {
+    callback(null,listData)
+}
+
+module.exports.findById = (id, callback) => {
+    callback(null, listData.find(item => item.id == id)); // typeof id === "string"
+}
+module.exports.save = (pet, callback) => {
+    let {name, status} = pet;
+    if (!name && !status) {
+        callback("Pet is invalid");
+        return;
+    }
+    pet = {
+        id: Date.now(),
+        name,
+        status
+    };
+    listData.push(pet);
+    callback(null, pet);
+}
+module.exports.delete = (id, callback) => {
+    let roweffected = listData.length;
+    listData = listData.filter(item => item.id != id);
+    roweffected = roweffected - listData.length;
+    callback(null, {roweffected})
+}
+module.exports.update = (id, pet, callback) => {
+    let oldPet = listData.find(item => item.id == id);
+    if (!oldPet) {
+        callback(null,oldPet);
+        return
+    }
+    let index = listData.indexOf(oldPet);
+    Object.assign(oldPet, pet);
+    listData.fill(oldPet, index, ++index);
+    callback(null, oldPet);
+}

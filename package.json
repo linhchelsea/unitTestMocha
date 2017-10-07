@@ -1,0 +1,22 @@
+{
+  "name": "petstore",
+  "version": "1.0.0",
+  "description": "A PetStore API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "linhnm",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.1",
+    "mocha": "^4.0.0",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "should": "^13.1.0"
+  }
+}
